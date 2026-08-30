@@ -1,0 +1,214 @@
+/*
+ * Breeze Dark - TeamSpeak 3 Chatlog & Info-Fenster
+ *
+ * Wird zusaetzlich zu Breeze.qss geladen und faerbt den HTML-Inhalt von
+ * Chatverlauf, Info-Fenster (rechts) und die Vorlagen im Breeze-Ordner.
+ * Ohne diese Datei greift TeamSpeaks helles default_chat.qss - genau
+ * das war die Ursache fuer dunkelblaue/schwarze Schrift auf dunklem Grund.
+ *
+ * Breeze Dark Palette:
+ *   Text #eff0f1   gedimmt #bdc3c7   Akzent #3daee9   Link #3daee9
+ *   Positiv #27ae60   Neutral #f67400   Negativ #da4453
+ */
+
+/* @group Global */
+
+p {
+    padding: 0px;
+    margin: 0px;
+}
+
+body, td, th, div, span {
+    color: #eff0f1;
+}
+
+a {
+    color: #3daee9;
+    text-decoration: none;
+}
+
+hr {
+    color: #4d5257;
+    background-color: #4d5257;
+}
+
+/* @end */
+
+/* @group Objekt-Links */
+
+.TextMessage_UserLink,
+.TextMessage_OfflineLink,
+.TextMessage_ChannelLink,
+.TextMessage_ServerLink {
+    color: #3daee9;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* @end */
+
+/* @group Nachrichten */
+
+.TextMessage_HostName {
+    color: #3daee9;
+    font-weight: bold;
+}
+
+.TextMessage_Welcome,
+.TextMessage_HostMessage,
+.TextMessage_Poke {
+    color: #27ae60;
+}
+
+.TextMessage_Message,
+.TextMessage_Text {
+    color: #eff0f1;
+}
+
+.TextMessage_Normal,
+.TextMessage_Connected,
+.TextMessage_ClientConnected,
+.TextMessage_ClientJoined,
+.TextMessage_Disconnected,
+.TextMessage_ClientDisconnected,
+.TextMessage_ClientSwitched,
+.TextMessage_ClientLeft,
+.TextMessage_ChannelCreated,
+.TextMessage_ChannelDeleted,
+.TextMessage_ChannelEdited,
+.TextMessage_ChannelMoved,
+.TextMessage_ServerEdited,
+.TextMessage_GroupAssigned,
+.TextMessage_GroupRevoked,
+.TextMessage_TalkPowerAssigned,
+.TextMessage_TalkPowerRevoked,
+.TextMessage_TalkPowerRequested {
+    color: #93a1a9;
+}
+
+.TextMessage_ClientDropped,
+.TextMessage_ClientKicked,
+.TextMessage_ClientBanned {
+    color: #da4453;
+}
+
+/* @end */
+
+/* @group Zeit und Verlauf */
+
+.TextMessage_Time {
+    color: #7f8c8d;
+    font-weight: normal;
+}
+
+.TextMessage_BeginHistory,
+.TextMessage_EndHistory {
+    color: #7f8c8d;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* @end */
+
+/* @group Fehler */
+
+.TextMessage_ServerError {
+    color: #da4453;
+    font-weight: bold;
+}
+
+/* @end */
+
+/* @group Info-Fenster */
+
+.InfoFrame {
+    color: #eff0f1;
+}
+
+.InfoFrame_Title {
+    font-size: x-large;
+}
+
+.InfoFrame_Title .TextMessage_UserLink,
+.InfoFrame_Title .TextMessage_ChannelLink,
+.InfoFrame_Title .TextMessage_ServerLink {
+    color: #3daee9;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.InfoFrame_Title .InfoFrame_CustomNick {
+    color: #bdc3c7;
+}
+
+.InfoFrame_Table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    color: #eff0f1;
+}
+
+.InfoFrame_Table td {
+    padding: 0px 4px 0px 1px;
+    color: #eff0f1;
+}
+
+.Highlight,
+.InfoFrame_Table td.Highlight {
+    color: #3daee9;
+    font-weight: bold;
+}
+
+.Important,
+.InfoFrame_Table td.Important {
+    color: #f67400;
+    font-weight: bold;
+}
+
+.Active,
+.InfoFrame_Table td.Active {
+    color: #27ae60;
+}
+
+.Inactive,
+.InfoFrame_Table td.Inactive {
+    color: #7f8c8d;
+}
+
+.InfoFrame_Table td.Label {
+    color: #bdc3c7;
+    font-weight: bold;
+}
+
+.InfoFrame_Table td.Value {
+    color: #eff0f1;
+}
+
+.InfoFrame_Table td.Bottom {
+    vertical-align: bottom;
+}
+
+.InfoFrame_Table td.List {
+    padding: 0px 1px 0px 8px;
+}
+
+.InfoFrame_Table td.Badge {
+    padding: 5px 5px 0px 5px;
+}
+
+.InfoFrame_Table td.Space-Top {
+    padding: 10px 0px 0px 0px;
+}
+
+.InfoFrame_Table td.Space-Bot {
+    padding: 0px 0px 10px 0px;
+}
+
+.InfoFrame_Table.Space-Top {
+    margin: 10px 0px 0px 0px;
+}
+
+.InfoFrame_Table.Space-Bot {
+    margin: 0px 0px 10px 0px;
+}
+
+/* @end */
