@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Erzeugt ein Breeze-Dark-taugliches Icon-Pack fuer TeamSpeak 3.
+"""Builds an icon pack suitable for Breeze Dark from TeamSpeak 3's own pack.
 
-TeamSpeaks Pack "default_mono_2014" zeichnet seine Glyphen in #404547.
-Auf dem Breeze-Dark-Hintergrund #31363b ist das praktisch unsichtbar --
-die Icons erscheinen als dunkle Kloetze. Dieses Skript liest das
-installierte Original, faerbt die SVGs um und schreibt ein neues Zip.
+TeamSpeak's "default_mono_2014" pack draws its glyphs in #404547. Against the
+Breeze Dark background #31363b that is practically invisible -- the icons show
+up as dark blobs. This script reads the installed original, recolors the SVGs
+and writes a new zip.
 
-Die Originalgrafiken gehoeren TeamSpeak Systems GmbH und liegen deshalb
-nicht im Repository. Das Pack wird lokal aus deiner Installation gebaut.
+The original graphics belong to TeamSpeak Systems GmbH and are therefore not
+part of the repository. The pack is built locally from your installation.
 
     python3 tools/build-iconpack.py --install
 """
@@ -22,31 +22,31 @@ import tempfile
 import zipfile
 from pathlib import Path
 
-# Quellfarbe -> Breeze-Dark-Entsprechung.
-# Weiss wird mit umgekehrt: es dient im Original als Aussparung *auf* dem
-# dunklen Glyph (etwa das X im Trennen-Icon). Bleibt es weiss, verschwindet
-# es im nun hellen Glyph.
+# Source color -> Breeze Dark equivalent.
+# White is inverted along with the rest: in the original it is a cut-out *on
+# top of* the dark glyph (the X in the disconnect icon, for example). Left
+# white it would disappear into the now-light glyph.
 COLOR_MAP = {
-    "404547": "#EFF0F1",  # Hauptglyph (dunkelgrau) -> Breeze-Text
-    "101719": "#BDC3C7",  # fast schwarz -> gedimmtes Grau
-    "00325A": "#3DAEE9",  # dunkles Navy -> Breeze-Blau
-    "FFFFFF": "#31363B",  # Aussparung -> Fensterfarbe
+    "404547": "#EFF0F1",  # main glyph (dark gray) -> Breeze text
+    "101719": "#BDC3C7",  # near black -> dimmed gray
+    "00325A": "#3DAEE9",  # dark navy -> Breeze blue
+    "FFFFFF": "#31363B",  # cut-out -> window color
     "FEFEFE": "#31363B",
-    "9BA096": "#C6CBC2",  # Olivgrau -> aufgehellt
-    "B7B9BA": "#5A5F63",  # helles Grau -> abgedunkelt
+    "9BA096": "#C6CBC2",  # olive gray -> lightened
+    "B7B9BA": "#5A5F63",  # light gray -> darkened
 }
 
 HEX = re.compile(r"#([0-9a-fA-F]{6})\b")
 
-# Emoticons sind bunte Smileys und bleiben unangetastet.
+# Emoticons are colorful smileys and stay untouched.
 SKIP_DIRS = {"emoticons"}
 
 def gfx_dirs() -> list[Path]:
-    """Moegliche gfx-Ordner auf Linux, Windows und macOS."""
+    """Possible gfx folders on Linux, Windows and macOS."""
     home = Path.home()
     dirs: list[Path] = []
 
-    # Linux: Flatpak-Installation (Systemweit und pro Benutzer)
+    # Linux: Flatpak installation (system-wide and per user)
     for base in (
         Path("/var/lib/flatpak/app/com.teamspeak.TeamSpeak3"),
         home / ".local/share/flatpak/app/com.teamspeak.TeamSpeak3",
@@ -54,7 +54,7 @@ def gfx_dirs() -> list[Path]:
         if base.is_dir():
             dirs += sorted(d for d in base.glob("*/*/*/files/extra/gfx") if d.is_dir())
 
-    # Linux: klassische Installation und Benutzerordner
+    # Linux: classic installation and user folder
     dirs += [
         home / ".var/app/com.teamspeak.TeamSpeak3/.ts3client/gfx",
         home / ".ts3client/gfx",
@@ -76,11 +76,11 @@ def gfx_dirs() -> list[Path]:
 
 
 def find_source(explicit: str | None, name: str) -> Path:
-    """Sucht das Original-Zip in den ueblichen Installationspfaden."""
+    """Locates the original zip in the usual installation paths."""
     if explicit:
         p = Path(explicit).expanduser()
         if not p.is_file():
-            sys.exit(f"Nicht gefunden: {p}")
+            sys.exit(f"Not found: {p}")
         return p
 
     for d in gfx_dirs():
@@ -89,7 +89,7 @@ def find_source(explicit: str | None, name: str) -> Path:
             return candidate
 
     sys.exit(
-        f"{name} nicht gefunden. Pfad bitte mit --source angeben, etwa:\n"
+        f"{name} not found. Pass the path with --source, for example:\n"
         "  Linux:   --source /var/lib/flatpak/app/com.teamspeak.TeamSpeak3/"
         "x86_64/stable/<hash>/files/extra/gfx/default_mono_2014.zip\n"
         '  Windows: --source "C:\\Program Files\\TeamSpeak 3 Client\\gfx\\'
@@ -98,7 +98,7 @@ def find_source(explicit: str | None, name: str) -> Path:
 
 
 def config_dir() -> Path:
-    """Benutzerkonfiguration von TeamSpeak 3."""
+    """TeamSpeak 3 user configuration folder."""
     home = Path.home()
     if appdata := os.environ.get("APPDATA"):
         win = Path(appdata) / "TS3Client"
@@ -144,18 +144,18 @@ def build(source: Path, output: Path) -> tuple[int, int]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--source", help="Pfad zu default_mono_2014.zip (sonst automatische Suche)")
-    ap.add_argument("--pack-name", default="default_mono_2014", help="Name des Quell-Packs")
-    ap.add_argument("--output", default="breeze_dark_mono.zip", help="Zieldatei")
+    ap.add_argument("--source", help="path to default_mono_2014.zip (autodetected otherwise)")
+    ap.add_argument("--pack-name", default="default_mono_2014", help="name of the source pack")
+    ap.add_argument("--output", default="breeze_dark_mono.zip", help="output file")
     ap.add_argument(
         "--install",
         action="store_true",
-        help="direkt in den gfx-Ordner der TeamSpeak-Konfiguration schreiben",
+        help="write straight into the gfx folder of the TeamSpeak configuration",
     )
     args = ap.parse_args()
 
     source = find_source(args.source, args.pack_name + ".zip")
-    print(f"Quelle: {source}")
+    print(f"Source: {source}")
 
     if args.install:
         output = config_dir() / "gfx" / Path(args.output).name
@@ -163,10 +163,10 @@ def main() -> None:
         output = Path(args.output).expanduser()
 
     changed, kept = build(source, output)
-    print(f"{changed} SVGs umgefaerbt, {kept} Dateien unveraendert uebernommen")
-    print(f"Geschrieben: {output}")
+    print(f"{changed} SVGs recolored, {kept} files copied unchanged")
+    print(f"Written: {output}")
     if args.install:
-        print("\nAktivieren: Extras -> Optionen -> Design -> Icon-Pack -> "
+        print("\nActivate: Tools -> Options -> Design -> Icon pack -> "
               f"{output.stem}")
 
 

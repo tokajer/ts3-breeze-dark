@@ -1,23 +1,23 @@
 /*
  * Breeze Dark - TeamSpeak 3 Style
  *
- * Nachbau des KDE Breeze Dark Farbschemas fuer den TeamSpeak 3 Client.
- * Dateien dieses Styles:
- *   Breeze.qss        - Widgets (diese Datei)
- *   Breeze_chat.qss   - Chatlog + Info-Fenster (HTML)
- *   Breeze-Ordner     - Vorlagen (*.tpl) fuer Info-Fenster und Tooltips
+ * Recreation of the KDE Breeze Dark color scheme for the TeamSpeak 3 client.
+ * Files belonging to this style:
+ *   Breeze.qss        - widgets (this file)
+ *   Breeze_chat.qss   - chat log + info pane (HTML)
+ *   Breeze folder     - templates (*.tpl) for the info pane and tooltips
  *
- * Breeze Dark Palette:
- *   Fenster      #31363b     Ansicht/Base   #232629
- *   Text         #eff0f1     Text gedimmt   #bdc3c7
- *   Deaktiviert  #7f8c8d     Rahmen         #4d5257 / #76797c
- *   Akzent       #3daee9     Link           #3daee9
- *   Positiv      #27ae60     Neutral        #f67400     Negativ  #da4453
+ * Breeze Dark palette:
+ *   Window       #31363b     View/base      #232629
+ *   Text         #eff0f1     Text dimmed    #bdc3c7
+ *   Disabled     #7f8c8d     Borders        #4d5257 / #76797c
+ *   Accent       #3daee9     Link           #3daee9
+ *   Positive     #27ae60     Neutral        #f67400     Negative #da4453
  *
- * TeamSpeak liest die folgenden Zuweisungen aus diesem Kommentar aus und
- * setzt damit die Qt-Palette. Das faerbt auch alles, was nicht per QSS
- * erreichbar ist: Links im Chat, nativ gezeichnete Pfeile und Haken,
- * Platzhaltertexte und die Farben im Serverbaum.
+ * TeamSpeak parses the assignments below out of this comment and applies them
+ * to the Qt palette. That also colors everything QSS cannot reach: links in
+ * the chat, natively drawn arrows and check marks, placeholder text and the
+ * client state colors in the server tree.
  *
  * QPalette::Window          = #31363b;
  * QPalette::WindowText      = #eff0f1;
@@ -46,7 +46,7 @@
  * CustomColor::ClientMuted     = #7f8c8d;
  */
 
-/* ============================================================ Basis */
+/* ============================================================= Base */
 
 * {
     font-family: "Noto Sans", sans-serif;
@@ -93,7 +93,7 @@ QToolTip {
     opacity: 245;
 }
 
-/* ============================================== Ansichten / Listen */
+/* ================================================= Views and lists */
 
 QTreeView, QListView, QTableView, QColumnView, QTextEdit, QTextBrowser,
 QPlainTextEdit, QListWidget, QTreeWidget, QTableWidget {
@@ -168,7 +168,7 @@ QTableView {
     gridline-color: #3b4045;
 }
 
-/* ================================================ Menues / Leisten */
+/* ============================================== Menus and toolbars */
 
 QMenuBar {
     background-color: #31363b;
@@ -234,9 +234,9 @@ QToolBar {
     spacing: 2px;
 }
 
-/* Griff und Trenner der Toolbar bewusst NICHT stylen: Qt zeichnet sie
-   nativ ueber die Palette (Light/Midlight/Dark). Eigene Regeln dafuer
-   haben unter Qt5 schwarze Flaechen erzeugt. */
+/* Deliberately NOT styling the toolbar handle and separator: Qt draws them
+   natively from the palette (Light/Midlight/Dark). Custom rules for these
+   produced black areas under Qt5. */
 
 QToolButton {
     background-color: transparent;
@@ -258,8 +258,9 @@ QToolButton:disabled {
     color: #7f8c8d;
 }
 
-/* Knoepfe mit Aufklappmenue teilt Qt in Hauptflaeche + menu-button.
-   Ohne eigene Regel bleibt diese zweite Zone ungefuellt und wird schwarz. */
+/* Qt splits buttons that have a drop-down menu into a main area and a
+   menu-button. Without a rule of its own that second zone stays unpainted
+   and turns black. */
 QToolButton::menu-button {
     background-color: #31363b;
     border: none;
@@ -339,7 +340,7 @@ QDialogButtonBox QPushButton {
     min-width: 72px;
 }
 
-/* ==================================================== Eingabefelder */
+/* ======================================================= Input fields */
 
 QLineEdit, QSpinBox, QDoubleSpinBox, QDateEdit, QTimeEdit, QDateTimeEdit,
 QKeySequenceEdit {
@@ -396,7 +397,7 @@ QSpinBox::down-button:hover, QDoubleSpinBox::down-button:hover {
     background-color: #3daee9;
 }
 
-/* ======================================================= ComboBoxen */
+/* ========================================================= Combo boxes */
 
 QComboBox {
     background-color: #31363b;
@@ -445,7 +446,7 @@ QComboBox QAbstractItemView {
     selection-color: #ffffff;
 }
 
-/* ============================================ Checkboxen / Radios */
+/* ========================================= Check boxes and radios */
 
 QCheckBox, QRadioButton {
     color: #eff0f1;
@@ -603,7 +604,7 @@ QTabBar QToolButton {
     border-radius: 3px;
 }
 
-/* ===================================================== Scrollbalken */
+/* ========================================================= Scroll bars */
 
 QScrollBar:vertical {
     background-color: #2b2e31;
@@ -656,7 +657,7 @@ QScrollArea {
     border: none;
 }
 
-/* ========================================== Slider / Fortschritt */
+/* ======================================== Sliders and progress */
 
 QSlider::groove:horizontal {
     background-color: #232629;
@@ -672,13 +673,13 @@ QSlider::groove:vertical {
     border-radius: 2px;
 }
 
-/* Gefuellte Seite des Sliders */
+/* Filled side of the slider */
 QSlider::sub-page:horizontal, QSlider::add-page:vertical {
     background-color: #3daee9;
     border-radius: 2px;
 }
 
-/* Leere Seite - MUSS gesetzt sein, sonst fuellt Qt sie schwarz */
+/* Empty side - MUST be set, otherwise Qt fills it black */
 QSlider::add-page:horizontal, QSlider::sub-page:vertical {
     background-color: #232629;
     border-radius: 2px;
@@ -730,7 +731,7 @@ QProgressBar::chunk {
     border-radius: 2px;
 }
 
-/* ============================================ Splitter / Dock */
+/* ============================================ Splitter and dock */
 
 QSplitter::handle {
     background-color: #31363b;
@@ -771,7 +772,7 @@ QDockWidget::title {
     border-radius: 3px;
 }
 
-/* ================================================ Kalender / Sonstiges */
+/* ============================================= Calendar and misc */
 
 QCalendarWidget QWidget {
     background-color: #232629;
@@ -805,9 +806,9 @@ QMessageBox QLabel, QInputDialog QLabel {
     color: #eff0f1;
 }
 
-/* ========================================= TeamSpeak: Spezifisches */
+/* ============================================ TeamSpeak specifics */
 
-/* Serverbaum */
+/* Server tree */
 QTreeView#ServerTreeView {
     background-color: #232629;
     alternate-background-color: transparent;
@@ -815,7 +816,7 @@ QTreeView#ServerTreeView {
     qproperty-rootIsDecorated: false;
 }
 
-/* Info-Fenster rechts und Chatlog: Basis dunkel, kein helles Wasserzeichen */
+/* Info pane and chat log: dark base, no light watermark */
 QTextEdit#InfoFrame {
     background-color: #232629;
     background-image: none;
@@ -828,7 +829,7 @@ QTextEdit#ChatTab {
     border: 1px solid #4d5257;
 }
 
-/* Chat-Eingabezeile */
+/* Chat input line */
 QTextEdit#ChatLineEdit {
     background-color: #232629;
     color: #eff0f1;
@@ -845,7 +846,7 @@ QTextEdit#ChatLineEdit[helpTextVisible="false"] {
     color: #eff0f1;
 }
 
-/* Kopfzeilen-Banner (Lesezeichen, Identitaeten, myTeamSpeak-Login) */
+/* Header banners (bookmarks, identities, myTeamSpeak login) */
 QLabel#bookmarksBanner, QLabel#identitiesBanner,
 QLabel#accountLoginBanner, QLabel#accountCreateBanner {
     background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
@@ -862,7 +863,7 @@ QLabel#accountLoginBanner, QLabel#accountCreateBanner {
     qproperty-minimumSize: 420px 32px;
 }
 
-/* Optionen-Dialog Kopfbereich */
+/* Options dialog header area */
 QWidget#HeadlineLabel {
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1,
                                       stop: 0 #3b4045, stop: 1 #31363b);
@@ -893,7 +894,7 @@ QLabel#NewsLeftLabel {
     padding-right: 6px;
 }
 
-/* Verbindungsinfo-Dialog */
+/* Connection info dialog */
 QWidget#ConnectionInfoDialog {
     background-color: #31363b;
 }
@@ -912,7 +913,7 @@ QWidget#ConnectionInfoDialog QTabBar::tab:!selected:bottom {
     margin-bottom: 0;
 }
 
-/* Berechtigungen: blaue Standard-Schrift nicht selektierter Eintraege vermeiden */
+/* Permissions: avoid the default blue text on unselected entries */
 QListView#groupsListView::item:!selected {
     color: #eff0f1;
 }
@@ -922,26 +923,26 @@ QListWidget#identitiesListWidget {
     color: #eff0f1;
 }
 
-/* Icon-Auswahl */
+/* Icon picker */
 QListWidget#localIconsListWidget::item:selected,
 QListWidget#remoteIconsListWidget::item:selected {
     background-color: #2b6a8a;
     border: 1px solid #3daee9;
 }
 
-/* Dateibrowser: Hover/Selektion nicht ueber die Icons legen */
+/* File browser: keep hover/selection from covering the icons */
 QListView#fileListView::item:hover,
 QListView#fileListView::item:selected {
     background: transparent;
 }
 
-/* Tabellen mit Wechselfarben */
+/* Tables with alternating rows */
 QTableView#clientsTableView, QTableView#banTableView {
     qproperty-alternatingRowColors: true;
     alternate-background-color: #2a2e32;
 }
 
-/* Server-Integrationen (im Default-Style hellblau) */
+/* Server integrations (light blue in the default style) */
 com--teamspeak--ui--ServerIntegrationsWidget QWidget#ExistingServerIntegration,
 com--teamspeak--ui--ServerIntegrationsWidget QWidget#AvailableServerIntegration {
     background-color: #2b2e31;

@@ -1,22 +1,21 @@
 # TS3 Breeze Dark
 
-Ein durchgängiges **KDE-Breeze-Dark**-Theme für den TeamSpeak-3-Client unter Linux.
+A consistent **KDE Breeze Dark** theme for the TeamSpeak 3 client.
 
-![Screenshot des TeamSpeak-Clients im Breeze-Dark-Theme](docs/screenshot.png)
+![Screenshot of the TeamSpeak client in the Breeze Dark theme](docs/screenshot.png)
 
-Anders als die meisten TS3-Dark-Themes färbt dieses nicht nur die offensichtlichen
-Widgets ein, sondern deckt auch die drei Stellen ab, an denen sonst helle Reste
-durchschlagen:
+Unlike most TS3 dark themes, this one does not stop at the obvious widgets. It
+also covers the three places where light remnants usually bleed through:
 
-- **Chatverlauf und Info-Fenster** über eine eigene `Breeze_chat.qss`. Fehlt diese
-  Datei, greift TeamSpeaks helles `default_chat.qss` — dunkelblaue Links und
-  schwarze Schrift auf dunklem Grund.
-- **Baum-Tooltips** über umgestellte Vorlagen. Die mitgelieferten Templates sind
-  hart auf Weiß/Schwarz verdrahtet.
-- **Die Qt-Palette** über Werte, die TeamSpeak aus dem Stylesheet-Kommentar
-  ausliest. Damit werden auch Dinge dunkel, die per QSS gar nicht erreichbar sind:
-  Links im Chat, nativ gezeichnete Pfeile, Platzhaltertexte und die
-  Zustandsfarben im Serverbaum (Freund, Blockiert, Aufnahme, Abwesend, Stumm).
+- **Chat log and info pane**, via a dedicated `Breeze_chat.qss`. Without that
+  file TeamSpeak falls back to its light `default_chat.qss` — dark blue links
+  and black text on a dark background.
+- **Tree tooltips**, via reworked templates. The shipped templates are
+  hard-wired to white on black.
+- **The Qt palette**, via values TeamSpeak reads from a stylesheet comment. This
+  also darkens what QSS cannot reach at all: links in the chat, natively drawn
+  arrows, placeholder text, and the client state colors in the server tree
+  (friend, blocked, recording, away, muted).
 
 ## Installation
 
@@ -28,11 +27,11 @@ cd ts3-breeze-dark
 ./install.sh --icons
 ```
 
-Das Skript erkennt Flatpak- und klassische Installation automatisch.
+The script detects Flatpak and classic installations automatically.
 
 ### Windows
 
-In PowerShell, im entpackten Ordner:
+In PowerShell, inside the extracted folder:
 
 ```powershell
 git clone <repo-url> ts3-breeze-dark
@@ -40,33 +39,33 @@ cd ts3-breeze-dark
 .\install.ps1 -Icons
 ```
 
-Falls PowerShell die Ausführung blockiert, für diese eine Sitzung erlauben:
+If PowerShell blocks execution, allow it for this session only:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
-Bei einer **portablen Installation** liegt die Konfiguration im Programmordner
-statt unter `%APPDATA%`. Dann den Pfad mitgeben:
+With a **portable installation** the configuration lives in the program folder
+instead of `%APPDATA%`. Pass the path in that case:
 
 ```powershell
 .\install.ps1 -Icons -ConfigPath "D:\TeamSpeak3"
 ```
 
-`-Icons` benötigt Python 3. Ohne Python wird der Style trotzdem installiert und
-nur das Icon-Pack übersprungen.
+`-Icons` requires Python 3. Without Python the style still installs and only the
+icon pack is skipped.
 
-### Danach (alle Systeme)
+### Afterwards (all systems)
 
-1. TeamSpeak **komplett beenden und neu starten** — Palettenwerte werden nur beim
-   Start gelesen, ein Umschalten im laufenden Client genügt nicht.
-2. Extras → Optionen → Design → **Style: Breeze**
-3. Mit `--icons` / `-Icons` zusätzlich: Extras → Optionen → Design →
-   **Icon-Pack: breeze_dark_mono**
+1. **Quit TeamSpeak completely and restart it** — palette values are only read
+   at startup, switching the style in a running client is not enough.
+2. Tools → Options → Design → **Style: Breeze**
+3. With `--icons` / `-Icons`, additionally: Tools → Options → Design →
+   **Icon pack: breeze_dark_mono**
 
-### Manuell
+### Manual installation
 
-Diese drei Dinge in den Konfigurationsordner kopieren:
+Copy these three things into the configuration folder:
 
 ```
 styles/Breeze.qss
@@ -74,65 +73,66 @@ styles/Breeze_chat.qss
 styles/Breeze/*.tpl
 ```
 
-| System | Konfigurationsordner |
+| System | Configuration folder |
 |---|---|
 | Windows | `%APPDATA%\TS3Client\` |
-| Windows, portabel | Programmordner der Installation |
+| Windows, portable | the installation's program folder |
 | Linux, Flatpak | `~/.var/app/com.teamspeak.TeamSpeak3/.ts3client/` |
-| Linux, klassisch | `~/.ts3client/` |
+| Linux, classic | `~/.ts3client/` |
 | macOS | `~/Library/Application Support/TeamSpeak 3/` |
 
-Unter Windows erreichst du den Ordner am schnellsten über `Win`+`R` und die
-Eingabe `%APPDATA%\TS3Client`.
+On Windows the quickest way there is `Win`+`R` and entering
+`%APPDATA%\TS3Client`.
 
-Zwei Namensregeln, die der Client fest verdrahtet hat:
+Two naming rules the client has hard-wired:
 
-- Der Ordner unter `styles/` muss exakt so heißen wie die `.qss` ohne Endung —
-  die Vorlagen werden unter `styles/<Stylename>/` gesucht.
-- Die Chat-Datei muss `<Stylename>_chat.qss` heißen.
+- The folder under `styles/` must be named exactly like the `.qss` without its
+  extension — templates are looked up in `styles/<StyleName>/`.
+- The chat file must be named `<StyleName>_chat.qss`.
 
-## Aufbau
+## Layout
 
-| Datei | Zweck |
+| File | Purpose |
 |---|---|
-| `styles/Breeze.qss` | Widgets, Qt-Palette, TeamSpeak-spezifische Objektnamen |
-| `styles/Breeze_chat.qss` | Chatverlauf und Info-Fenster (HTML-Teilmenge) |
-| `styles/Breeze/*.tpl` | Vorlagen für Info-Fenster und Baum-Tooltips |
-| `tools/build-iconpack.py` | erzeugt ein dunkeltaugliches Icon-Pack |
-| `install.sh` | Installation unter Linux und macOS |
-| `install.ps1` | Installation unter Windows |
+| `styles/Breeze.qss` | widgets, Qt palette, TeamSpeak-specific object names |
+| `styles/Breeze_chat.qss` | chat log and info pane (HTML subset) |
+| `styles/Breeze/*.tpl` | templates for the info pane and tree tooltips |
+| `tools/build-iconpack.py` | builds an icon pack suitable for dark backgrounds |
+| `install.sh` | installation on Linux and macOS |
+| `install.ps1` | installation on Windows |
 
-## Farben
+## Colors
 
-| Rolle | Wert |
+| Role | Value |
 |---|---|
-| Fenster | `#31363b` |
-| Ansicht / Base | `#232629` |
-| Wechselzeile | `#2a2e32` |
+| Window | `#31363b` |
+| View / base | `#232629` |
+| Alternate row | `#2a2e32` |
 | Text | `#eff0f1` |
-| Text gedimmt | `#bdc3c7` |
-| Deaktiviert | `#7f8c8d` |
-| Rahmen | `#4d5257`, `#76797c` |
-| Akzent / Link | `#3daee9` |
-| Positiv | `#27ae60` |
+| Text dimmed | `#bdc3c7` |
+| Disabled | `#7f8c8d` |
+| Borders | `#4d5257`, `#76797c` |
+| Accent / link | `#3daee9` |
+| Positive | `#27ae60` |
 | Neutral | `#f67400` |
-| Negativ | `#da4453` |
+| Negative | `#da4453` |
 
-## Icon-Pack
+## Icon pack
 
-TeamSpeaks Pack `default_mono_2014` zeichnet seine Glyphen in `#404547`. Gegen den
-Fensterhintergrund `#31363b` ist das ein Kontrastverhältnis nahe 1:1 — die Icons
-erscheinen als dunkle Klötze. `tools/build-iconpack.py` liest das installierte
-Original, färbt die SVGs um und legt `breeze_dark_mono.zip` ab.
+TeamSpeak's `default_mono_2014` pack draws its glyphs in `#404547`. Against the
+window background `#31363b` that is a contrast ratio close to 1:1 — the icons
+show up as dark blobs. `tools/build-iconpack.py` reads the installed original,
+recolors the SVGs and writes `breeze_dark_mono.zip`.
 
-Weiß wird dabei mit umgekehrt: im Original dient es als Aussparung *auf* dem
-dunklen Glyph, etwa das X im Trennen-Icon. Bliebe es weiß, verschwände es im nun
-hellen Glyph.
+White is inverted along with everything else: in the original it serves as a
+cut-out *on top of* the dark glyph, for example the X in the disconnect icon. If
+it stayed white it would disappear into the now-light glyph.
 
-Die umgefärbten Grafiken liegen **nicht** im Repository — es sind abgeleitete
-Werke aus TeamSpeaks Icon-Pack. Das Skript baut sie lokal aus deiner Installation.
+The recolored graphics are **not** part of this repository — they are derivative
+works of TeamSpeak's icon pack. The script builds them locally from your own
+installation.
 
-Es findet das Original selbst; falls nicht, den Pfad mitgeben:
+It finds the original by itself; if it does not, pass the path:
 
 ```bash
 # Linux
@@ -143,27 +143,28 @@ python tools\build-iconpack.py --install
 python tools\build-iconpack.py --install --source "C:\Program Files\TeamSpeak 3 Client\gfx\default_mono_2014.zip"
 ```
 
-Ohne `--install` landet das Zip im aktuellen Ordner und kann von Hand nach
-`gfx\` im Konfigurationsordner kopiert werden.
+Without `--install` the zip ends up in the current folder and can be copied into
+`gfx\` inside the configuration folder by hand.
 
-## Notizen zu Qt 5
+## Notes on Qt 5
 
-TeamSpeak 3 nutzt Qt 5. Zwei Fallstricke, die dort anders wirken als in Qt 6 und
-die beim Anpassen dieses Themes teuer waren:
+TeamSpeak 3 uses Qt 5. Two pitfalls that behave differently there than in Qt 6,
+and that were expensive to track down while building this theme:
 
-**Teilweise gestylte Subcontrols werden schwarz.** Sobald ein Widget per
-Stylesheet angefasst wird, zeichnet Qt seine Subcontrols über das Stylesheet. Jede
-Zone, für die keine Füllfarbe definiert ist, bleibt ungemalt — und ungemalte
-Fläche ist schwarz. Betroffen sind unter anderem:
+**Partially styled sub-controls turn black.** As soon as a widget is touched by a
+stylesheet, Qt draws its sub-controls through the stylesheet. Every zone without
+a defined fill color stays unpainted — and unpainted area is black. Affected,
+among others:
 
-- `QToolButton::menu-button` — Knöpfe mit Aufklappmenü teilt Qt in Hauptfläche und
-  Menüzone. Wird nur `QToolButton` gestylt, erscheint die Menüzone als schwarzer
-  Balken.
-- `QSlider::add-page` / `::sub-page` — beide Seiten brauchen eine Farbe, nicht nur
-  die gefüllte.
-- `QScrollBar::add-page` / `::sub-page`, `QToolBar::handle`, `QToolBar::separator`.
+- `QToolButton::menu-button` — Qt splits buttons that have a drop-down menu into
+  a main area and a menu zone. If only `QToolButton` is styled, the menu zone
+  shows up as a black bar.
+- `QSlider::add-page` / `::sub-page` — both sides need a color, not just the
+  filled one.
+- `QScrollBar::add-page` / `::sub-page`, `QToolBar::handle`,
+  `QToolBar::separator`.
 
-**Selbstgebaute CSS-Dreieck-Pfeile funktionieren nicht.** Das gängige Muster
+**Hand-built CSS triangle arrows do not work.** The common pattern
 
 ```css
 QComboBox::down-arrow {
@@ -175,35 +176,34 @@ QComboBox::down-arrow {
 }
 ```
 
-rendert unter Qt 5 die transparenten Rahmen als schwarze Fläche. Dieses Theme
-verzichtet deshalb komplett auf eigene Pfeile und überlässt sie Qt — über die
-gesetzte Palette werden sie automatisch hell.
+renders the transparent borders as a black area under Qt 5. This theme therefore
+avoids custom arrows entirely and leaves them to Qt — the palette set above makes
+them light automatically.
 
-Wer eigene Regeln ergänzt: der schnellste Test bei schwarzen Flächen ist, das
-Stylesheet testweise zu leeren und neu zu starten. Im hellen Standard-Theme sieht
-man sofort, welches Element an der Stelle eigentlich sitzt.
+If you add your own rules: the fastest way to diagnose a black area is to empty
+the stylesheet temporarily and restart. In the light default theme you can
+immediately see which element actually sits there.
 
-## Palettenwerte im Stylesheet
+## Palette values inside the stylesheet
 
-TeamSpeak parst zwei Muster aus der `.qss` — auch aus Kommentaren:
+TeamSpeak parses two patterns from the `.qss` — including from comments:
 
 ```
-QPalette::<Rolle>       = <Farbe>;
-CustomColor::<Name>     = <Farbe>;
+QPalette::<Role>        = <color>;
+CustomColor::<Name>     = <color>;
 ```
 
-Unterstützt sind die Qt-Rollen (`Window`, `Base`, `Text`, `Highlight`, `Link` …)
-sowie `ClientFriend`, `ClientBlocked`, `ClientRecording`, `ClientAway` und
-`ClientMuted`. Die Blockdefinition steht im Kopf von `Breeze.qss`.
+Supported are the Qt roles (`Window`, `Base`, `Text`, `Highlight`, `Link`, …) as
+well as `ClientFriend`, `ClientBlocked`, `ClientRecording`, `ClientAway` and
+`ClientMuted`. The block is defined at the top of `Breeze.qss`.
 
-## Lizenz
+## License
 
-Die Stylesheets und Skripte stehen unter der MIT-Lizenz (siehe `LICENSE`).
+The stylesheets and scripts are MIT licensed (see `LICENSE`).
 
-Die Vorlagen unter `styles/Breeze/` basieren auf den mit TeamSpeak 3
-ausgelieferten Templates (© TeamSpeak Systems GmbH) und sind lediglich umgefärbt.
-Die Icon-Grafiken gehören ebenfalls TeamSpeak Systems GmbH und werden nicht
-mitverteilt.
+The templates under `styles/Breeze/` are based on the templates shipped with
+TeamSpeak 3 (© TeamSpeak Systems GmbH) and are merely recolored. The icon
+graphics belong to TeamSpeak Systems GmbH as well and are not redistributed.
 
 ## If you like my work you can
 

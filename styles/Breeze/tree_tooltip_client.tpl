@@ -11,7 +11,7 @@ Templates must be placed in in a sub folder named like the theme (e.g. "styles/e
 -->
 
 <style type="text/css">
-    /* Breeze Dark: dunkler Tooltip-Hintergrund */
+    /* Breeze Dark: dark tooltip background */
     html, body {
         background-color: #232629 !important;
         color: #eff0f1 !important;
@@ -35,7 +35,7 @@ Templates must be placed in in a sub folder named like the theme (e.g. "styles/e
 
     td.label {
         font-weight: bold;
-        color: #bdc3c7 !important;   /* Breeze: gedimmte Beschriftung */
+        color: #bdc3c7 !important;   /* Breeze: dimmed label */
         padding-right: 15px;
     }
 
@@ -47,18 +47,18 @@ Templates must be placed in in a sub folder named like the theme (e.g. "styles/e
         vertical-align: top;
     }
 
-    /* Breeze Blau als Akzent */
+    /* Breeze blue as accent */
     .Highlight {
         color: #3daee9 !important;
         font-weight: bold;
     }
 
-    /* Normale Werte */
+    /* Regular values */
     td.Value {
         color: #eff0f1 !important;
     }
 
-    /* Breeze Neutral/Warnung */
+    /* Breeze neutral / warning */
     .Important {
         color: #f67400 !important;
         font-weight: bold;

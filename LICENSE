@@ -22,7 +22,7 @@ SOFTWARE.
 
 ---
 
-Die Vorlagen unter styles/Breeze/ basieren auf den mit TeamSpeak 3 ausgelieferten
-Templates, Copyright (c) 2009-2020 TeamSpeak Systems GmbH. Icon-Grafiken von
-TeamSpeak Systems GmbH werden nicht mitverteilt; tools/build-iconpack.py faerbt
-lediglich eine lokal vorhandene Installation um.
+The templates under styles/Breeze/ are based on the templates shipped with
+TeamSpeak 3, Copyright (c) 2009-2020 TeamSpeak Systems GmbH. Icon graphics by
+TeamSpeak Systems GmbH are not redistributed; tools/build-iconpack.py merely
+recolors a locally installed copy.
