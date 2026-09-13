@@ -258,6 +258,14 @@ QToolButton:disabled {
     color: #7f8c8d;
 }
 
+/* Buttons with a drop-down menu (popupMode MenuButtonPopup) keep laying their
+   icon out over the whole button while the menu-button below covers the right
+   hand side of it - the icon ends up clipped. The drop-down zone has to be
+   reserved as padding. */
+QToolButton[popupMode="1"] {
+    padding-right: 19px;
+}
+
 /* Qt splits buttons that have a drop-down menu into a main area and a
    menu-button. Without a rule of its own that second zone stays unpainted
    and turns black. */
